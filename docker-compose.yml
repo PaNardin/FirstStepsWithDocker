@@ -1,0 +1,63 @@
+nginx:
+    image: wonderfall/boring-nginx
+    container_name: nginx
+    links:
+      - nextcloud:nextcloud
+      - rutorrent:rutorrent
+    ports:
+      - "80:8000"
+      - "443:4430"
+    volumes:
+      - /mnt/docker/nginx/sites-enabled:/sites-enabled
+      - /mnt/docker/nginx/conf:/conf.d
+      - /mnt/docker/nginx/log:/var/log/nginx
+      - /mnt/docker/nginx/certs:/certs
+      - /mnt/docker/nginx/passwd:/passwds
+      - /mnt/docker/nginx/www:/www
+
+nextcloud-db:
+    image: mariadb
+    container_name: nextcloud-db
+    volumes:
+      - nextcloud-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=XXXX
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=XXXX
+      - MYSQL_PASSWORD=XXXX
+
+nextcloud:
+    image: wonderfall/nextcloud
+    container_name: nextcloud
+    environment:
+      - UID=1000
+      - GID=1000
+      - UPLOAD_MAX_SIZE=10G
+      - APC_SHM_SIZE=128M
+      - OPCACHE_MEM_SIZE=128
+      - REDIS_MAX_MEMORY=64mb
+      - CRON_PERIOD=15m
+      - TZ=Europe/Berlin
+      - ADMIN_USER=XXXX
+      - ADMIN_PASSWORD=XXXX
+      - DB_TYPE=mysql
+      - DB_NAME=nextcloud
+      - DB_USER=XXXX
+      - DB_PASSWORD=XXXX
+      - DB_HOST=XXXX
+    links:
+      - nextcloud-db:nextcloud-db
+    volumes:
+      - nextcloud-data:/data
+      - nextcloud-config:/config
+      - nextcloud-apps:/apps2
+
+rutorrent:
+    image: xataz/rtorrent-rutorrent
+    container_name: rutorrent
+    volumes:
+     - /mnt/docker/rutorrent/data:/data
+    environment:
+     - UID=1001
+     - GID=1001
+    tty: true
