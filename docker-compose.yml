@@ -4,16 +4,17 @@ nginx:
     links:
       - nextcloud:nextcloud
       - rutorrent:rutorrent
+      - sickrage:sickrage
     ports:
       - "80:8000"
       - "443:4430"
     volumes:
-      - /mnt/docker/nginx/sites-enabled:/sites-enabled
-      - /mnt/docker/nginx/conf:/conf.d
-      - /mnt/docker/nginx/log:/var/log/nginx
-      - /mnt/docker/nginx/certs:/certs
-      - /mnt/docker/nginx/passwd:/passwds
-      - /mnt/docker/nginx/www:/www
+      - ./nginx/sites-enabled:/sites-enabled
+      - ./nginx/conf:/conf.d
+      - ./nginx/log:/var/log/nginx
+      - ./nginx/certs:/certs
+      - ./nginx/passwd:/passwds
+      - ./nginx/www:/www
 
 nextcloud-db:
     image: mariadb
@@ -22,7 +23,7 @@ nextcloud-db:
       - nextcloud-db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=XXXX
-      - MYSQL_DATABASE=nextcloud
+      - MYSQL_DATABASE=XXXX
       - MYSQL_USER=XXXX
       - MYSQL_PASSWORD=XXXX
 
@@ -41,23 +42,41 @@ nextcloud:
       - ADMIN_USER=XXXX
       - ADMIN_PASSWORD=XXXX
       - DB_TYPE=mysql
-      - DB_NAME=nextcloud
+      - DB_NAME=XXXX
       - DB_USER=XXXX
       - DB_PASSWORD=XXXX
-      - DB_HOST=XXXX
+      - DB_HOST=nextcloud-db
     links:
       - nextcloud-db:nextcloud-db
     volumes:
-      - nextcloud-data:/data
-      - nextcloud-config:/config
-      - nextcloud-apps:/apps2
+      - ./nextcloud/nextcloud-data:/data
+      - ./nextcloud/nextcloud-config:/config
+      - ./nextcloud/nextcloud-apps:/apps2
 
 rutorrent:
     image: xataz/rtorrent-rutorrent
     container_name: rutorrent
     volumes:
-     - /mnt/docker/rutorrent/data:/data
+      - ./rutorrent/data:/data
     environment:
-     - UID=1001
-     - GID=1001
+      - UID=1001
+      - GID=1001
+    ports:
+      - "45000:45000"
+      - "45000:45000/udp"
     tty: true
+
+sickrage:
+   image: xataz/sickrage
+   container_name: sickrage
+   volumes:
+     - ./sickrage/config:/config
+     - ./rutorrent/data/torrents:/torrents
+     - ./sickrage/series:/series
+   environment:
+     - UID=1002
+     - GID=1002
+   links:
+     - rutorrent:rutorrent
+   ports:
+     - "8081:8081"

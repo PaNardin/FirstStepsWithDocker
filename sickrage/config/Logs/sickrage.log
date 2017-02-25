@@ -1,0 +1,25 @@
+2017-02-25 09:28:28 INFO     MAIN :: Backing up database before upgrade
+2017-02-25 09:28:28 INFO     MAIN :: Proceeding with upgrade
+2017-02-25 09:28:28 INFO     MAIN :: Add minor version numbers to database
+2017-02-25 09:28:29 INFO     MAIN :: Updated to: 43.1
+2017-02-25 09:28:29 INFO     MAIN :: Backing up database before upgrade
+2017-02-25 09:28:29 INFO     MAIN :: Proceeding with upgrade
+2017-02-25 09:28:29 INFO     MAIN :: Backing up config before upgrade
+2017-02-25 09:28:29 INFO     MAIN :: Proceeding with upgrade
+2017-02-25 09:28:29 INFO     MAIN :: Migrating config up to version 8: Convert Plex setting keys
+2017-02-25 09:28:29 INFO     MAIN :: Saving config file to disk
+2017-02-25 09:28:29 INFO     MAIN :: Starting SickRage [master] using '/config/config.ini'
+2017-02-25 09:28:29 INFO     TORNADO :: Starting SickRage on http://0.0.0.0:8081/
+2017-02-25 09:28:29 INFO     CHECKVERSION :: Checking for updates using GIT
+2017-02-25 09:28:29 INFO     MAIN :: Checking for scene exception updates from http://sickrage.github.io/scene_exceptions/scene_exceptions.json
+2017-02-25 09:28:30 INFO     MAIN :: Checking for XEM scene exception updates for theTVDB
+2017-02-25 09:28:31 INFO     MAIN :: Checking for scene exception updates for AniDB
+2017-02-25 09:34:07 INFO     MAIN :: Starting SickRage [master] using '/config/config.ini'
+2017-02-25 09:34:07 INFO     TORNADO :: Starting SickRage on http://0.0.0.0:8081/
+2017-02-25 09:34:07 INFO     CHECKVERSION :: Checking for updates using GIT
+2017-02-25 09:35:27 INFO     MAIN :: Starting SickRage [master] using '/config/config.ini'
+2017-02-25 09:35:27 INFO     TORNADO :: Starting SickRage on http://0.0.0.0:8081/
+2017-02-25 09:35:27 INFO     CHECKVERSION :: Checking for updates using GIT
+2017-02-25 09:36:31 INFO     MAIN :: Starting SickRage [master] using '/config/config.ini'
+2017-02-25 09:36:31 INFO     TORNADO :: Starting SickRage on http://0.0.0.0:8081/
+2017-02-25 09:36:31 INFO     CHECKVERSION :: Checking for updates using GIT
